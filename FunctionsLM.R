@@ -5,10 +5,10 @@
 # seed  - starting seed value
 generateY <- function(X, beta, sigma, seed = 5832652){
   #[ToDo] Set seed and generate Y following linear model
-  set.seed(5832652)
-  N=nrow(X)
-  epsilon=rnorm(n=N,sd=sigma)
-  Y=X%*%beta+epsilon
+  set.seed(5832652) #fixes the random number generator for reproducible results
+  N=nrow(X) #gets the number of observations in X
+  epsilon=rnorm(n=N,sd=sigma) #generates error terms
+  Y=X%*%beta+epsilon #adds the error to the fitted values
   # Return Y
   return(Y)
 }
@@ -18,14 +18,14 @@ generateY <- function(X, beta, sigma, seed = 5832652){
 # Y -response
 calculateBeta <- function(X, Y){
   # Calculate beta_LS
-  beta_LS=solve((t(X)%*%X))%*%t(X)%*%Y
+  beta_LS=solve((t(X)%*%X))%*%t(X)%*%Y #calculates the least square solution (X'X)^(-1)(X'Y)
   # Return beta
   return(beta_LS)
 }
 
 # Calculate MSE
 calculateMSE <- function(beta, beta_LS){
-  MSE=t(beta-beta_LS)%*%(beta-beta_LS)
+  MSE=t(beta-beta_LS)%*%(beta-beta_LS) #uses crossprod to get the MSE
   # Return MSE - error ||beta - beta_LS||_2^2
   return(MSE)
 }
