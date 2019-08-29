@@ -5,7 +5,7 @@
 # seed  - starting seed value
 generateY <- function(X, beta, sigma, seed = 5832652){
   #[ToDo] Set seed and generate Y following linear model
-  set.seed(5832652) #fixes the random number generator for reproducible results
+  set.seed(seed) #fixes the random number generator for reproducible results
   N = nrow(X) #gets the number of observations in X
   epsilon = rnorm(n=N, sd=sigma) #generates error terms
   Y = X %*% beta + epsilon #adds the error to the fitted values
